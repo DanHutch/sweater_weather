@@ -1,12 +1,27 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
+require 'simplecov'
+SimpleCov.start #"rails" do
+#   add_filter "app/channels"
+# end
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
+require 'vcr'
+require 'webmock/rspec'
+
+VCR.configure do |config|
+  config.ignore_localhost = true
+  config.cassette_library_dir = 'spec/cassettes'
+  config.hook_into :webmock
+  config.configure_rspec_metadata!
+  config.filter_sensitive_data("<GOOGLE_API_KEY>") { ENV['GOOGLE_API_KEY'] }
+  config.filter_sensitive_data("<DARK_SKY_API_KEY>") { ENV['DARK_SKY_API_KEY'] }
+end
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
@@ -29,10 +44,6 @@ begin
 rescue ActiveRecord::PendingMigrationError => e
   puts e.to_s.strip
   exit 1
-end
-
-SimpleCov.start "rails" do
-  add_filter "app/channels"
 end
 
 Shoulda::Matchers.configure do |config|
@@ -70,4 +81,14 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+end
+
+def stub_coords_api_calls
+   stub_request(:get, "https://maps.googleapis.com/maps/api/geocode/json?key=#{ENV["GOOGLE_API_KEY"]}&address=denver,co").
+      to_return(body: File.read("./spec/fixtures/sample_coords_response.json"))
+end
+
+def stub_weather_api_calls
+   stub_request(:get, "https://api.darksky.net/forecast/#{ENV["DARK_SKY_API_KEY"]}/39.7392358,-104.990251").
+      to_return(body: File.read("./spec/fixtures/sample_weather_response.json"))
 end
