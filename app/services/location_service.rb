@@ -1,8 +1,18 @@
 class LocationService
 
+	def self.get_coords(location)
+		new.get_coords(location)
+	end
+
 	def get_coords(location)
-		response = get_json("/maps/api/geocode/json?key=#{ENV["GOOGLE_API_KEY"]}&address=#{location}")
-		coords = response[:results].first[:geometry][:location]
+		data = get_json("/maps/api/geocode/json?key=#{ENV["GOOGLE_API_KEY"]}&address=#{location}")
+		info = Hash.new()
+		info[:coords] = data[:results].first[:geometry][:location]
+		locale = data[:results].first[:address_components]
+		info[:city] = locale[0][:long_name]
+		info[:state] = locale[2][:long_name]
+		info[:country] = locale[3][:long_name]
+		return info
 	end
 
 	private
@@ -19,4 +29,3 @@ class LocationService
 	end
 
 end
-# https://maps.googleapis.com/maps/api/geocode/outputFormat?parameters

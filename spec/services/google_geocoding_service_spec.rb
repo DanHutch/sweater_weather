@@ -4,11 +4,10 @@ RSpec.describe 'Google geocoding API request' do
 	it 'returns coordinates' do
 
 		VCR.use_cassette("vcr_location_results") do
-			service = LocationService.new
-			response = service.get_coords("denver,co")
+			response = LocationService.get_coords("denver,co")
 
-			expect(response[:lat]).to be_a Float
-			expect(response[:lng]).to be_a Float
+			expect(response[:coords][:lat]).to be_a Float
+			expect(response[:coords][:lng]).to be_a Float
 		end
 	end
 end
