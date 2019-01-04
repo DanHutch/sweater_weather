@@ -6,7 +6,7 @@ class Daily
               :gif_url
 
   def initialize(data_in)
-    @time = data_in[:time]
+    @time = data_in[:time].to_s
     @summary = data_in[:summary]
     @url = nil
   end

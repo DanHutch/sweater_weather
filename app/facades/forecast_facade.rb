@@ -25,7 +25,6 @@ class ForecastFacade
     serialized = DailySerializer.new(@forecast)
   end
 
-
   private
 
     def add_daily_forecasts(forecast)
