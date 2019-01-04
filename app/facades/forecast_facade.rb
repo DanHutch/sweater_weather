@@ -14,6 +14,22 @@ class ForecastFacade
     serialized = ForecastSerializer.new(forecast)
   end
 
+  def self.dailies_with_gifs(location)
+    new(location).dailies_with_gifs
+  end
+
+  def dailies_with_gifs
+    place_data = coord_results
+    forecast = Forecast.new(weather_results(place_data[:coords]), place_data)
+
+    dailies = forecast.dailies.map do |daily|
+      Daily.new(daily)
+    end
+
+# binding.pry
+    serialized = DailySerializer.new(forecast.dailies)
+  end
+
   private
 
     def weather_results(coords)
