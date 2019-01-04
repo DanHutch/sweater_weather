@@ -89,6 +89,9 @@ def stub_coords_api_calls
 end
 
 def stub_weather_api_calls
-   stub_request(:get, "https://api.darksky.net/forecast/#{ENV["DARK_SKY_API_KEY"]}/39.7392358,-104.990251").
-      to_return(body: File.read("./spec/fixtures/sample_weather_response.json"))
+   stub_request(:get, "https://api.darksky.net/forecast/#{ENV["DARK_SKY_API_KEY"]}/39.7392358,-104.990251").to_return(body: File.read("./spec/fixtures/sample_weather_response.json"))
 end
+
+# def stub_gif_api_calls
+#    stub_request(:get, "http://api.giphy.com/v1/gifs/search").to_return(body: File.read("./spec/fixtures/sample_gif_response.json"))
+# end
