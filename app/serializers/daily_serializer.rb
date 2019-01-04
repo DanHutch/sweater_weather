@@ -1,11 +1,12 @@
 class DailySerializer
   include FastJsonapi::ObjectSerializer
-  attributes
+  attributes :id
 
-  attributes :time do |object|
-    object.dailies.each do |daily|
-      binding.pry
-    end
-  end
+# binding.pry
+  # attributes :time do |object|
+  #   object.dailies.each do |daily|
+  #     binding.pry
+  #   end
+  # end
 
 end
