@@ -3,7 +3,7 @@ module Api
 		class GifsController < ApplicationController
 
 			def index
-				render json: ForecastFacade.dailies_with_gifs(params["location"])
+				render json: ForecastFacade.dailies_with_gifs(params["location"]),
 			end
 
 		end

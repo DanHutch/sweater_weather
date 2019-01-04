@@ -11,8 +11,9 @@ RSpec.describe 'GET /api/v1/gifs' do
     get "/api/v1/gifs#{parameters}"
 
     expect(response).to be_successful
+
+    results = JSON.parse(response.body, symbolize_names: true)
 binding.pry
-    # results = JSON.parse(response.body, symbolize_names: true)
 
   end
 

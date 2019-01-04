@@ -8,7 +8,7 @@ class Daily
 
   def initialize(data_in)
     @id = SecureRandom.uuid
-    @time = Time.at(data_in[:time])
+    @time = data_in[:time]
     @summary = data_in[:summary]
     @gif_url = nil
   end
