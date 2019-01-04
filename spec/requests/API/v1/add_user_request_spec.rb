@@ -22,6 +22,16 @@ RSpec.describe 'POST /api/v1/users' do
     expect(response.status).to eq(422)
 
     expect(response.body).to eq("Something went wrong!")
+  end
 
+  it 'should not create a user if the email is already in use' do
+    user = User.create!(email: "whatever@example.com", password: "newpassword")
+    parameters = "?email=whatever@example.com&password=password&password_confirmation=password"
+
+    post "/api/v1/users#{parameters}"
+
+    expect(response.status).to eq(422)
+
+    expect(response.body).to eq("Something went wrong!")
   end
 end
