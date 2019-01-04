@@ -1,16 +1,14 @@
 class Daily
   require 'securerandom'
 
-  attr_reader :id,
-              :time,
+  attr_reader :time,
               :summary,
               :gif_url
 
   def initialize(data_in)
-    @id = SecureRandom.uuid
     @time = data_in[:time]
     @summary = data_in[:summary]
-    @gif_url = nil
+    @url = nil
   end
 
   def self.with_gif(init_data)
@@ -18,7 +16,7 @@ class Daily
   end
 
   def set_gif
-    @gif_url = gif_results[:data].first[:images][:downsized][:url]
+    @url = gif_results[:data].first[:images][:downsized][:url]
     return self
   end
 

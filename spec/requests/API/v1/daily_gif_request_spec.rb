@@ -15,6 +15,8 @@ RSpec.describe 'GET /api/v1/gifs' do
     results = JSON.parse(response.body, symbolize_names: true)
 binding.pry
 
+
+
   end
 
 end

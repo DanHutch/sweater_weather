@@ -20,12 +20,11 @@ class ForecastFacade
 
   def dailies_with_gifs
     place_data = coord_results
-    forecast = Forecast.new(weather_results(place_data[:coords]), place_data)
-    daily_gifs = []
-    forecast.dailies.each do |daily|
-      daily_gifs << Daily.with_gif(daily)
+    @forecast = Forecast.new(weather_results(place_data[:coords]), place_data)
+    @forecast.dailies.each do |daily|
+      @forecast.daily_forecasts << Daily.with_gif(daily)
     end
-    serialized = DailySerializer.new(daily_gifs)
+    serialized = DailySerializer.new(@forecast)
   end
 
   private
