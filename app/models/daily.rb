@@ -24,7 +24,7 @@ class Daily
 
   def gif_results
     gif_summary = @summary.gsub(" ", "+")
-    service.get_gif(gif_summary)
+    @gif_return ||= service.get_gif(gif_summary)
   end
 
   def service
