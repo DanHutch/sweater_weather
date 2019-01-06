@@ -7,6 +7,7 @@ RSpec.describe 'POST /api/v1/users' do
     post "/api/v1/users#{parameters}"
 
     expect(response).to be_successful
+    expect(response.status).to eq(201)
 
     results = JSON.parse(response.body, symbolize_names: true)
     expect(results[:data]).to have_key(:type)
