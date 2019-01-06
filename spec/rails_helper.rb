@@ -15,12 +15,15 @@ require 'vcr'
 require 'webmock/rspec'
 
 VCR.configure do |config|
+  config.allow_http_connections_when_no_cassette = true
+
   config.ignore_localhost = true
   config.cassette_library_dir = 'spec/cassettes'
   config.hook_into :webmock
   config.configure_rspec_metadata!
   config.filter_sensitive_data("<GOOGLE_API_KEY>") { ENV['GOOGLE_API_KEY'] }
   config.filter_sensitive_data("<DARK_SKY_API_KEY>") { ENV['DARK_SKY_API_KEY'] }
+  config.filter_sensitive_data("<GIPHY_API_KEY>") { ENV['GIPHY_API_KEY'] }
 end
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -57,6 +60,7 @@ RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
+
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
@@ -89,6 +93,9 @@ def stub_coords_api_calls
 end
 
 def stub_weather_api_calls
-   stub_request(:get, "https://api.darksky.net/forecast/#{ENV["DARK_SKY_API_KEY"]}/39.7392358,-104.990251").
-      to_return(body: File.read("./spec/fixtures/sample_weather_response.json"))
+   stub_request(:get, "https://api.darksky.net/forecast/#{ENV["DARK_SKY_API_KEY"]}/39.7392358,-104.990251").to_return(body: File.read("./spec/fixtures/sample_weather_response.json"))
 end
+
+# def stub_gif_api_calls
+#    stub_request(:get, "http://api.giphy.com/v1/gifs/search").to_return(body: File.read("./spec/fixtures/sample_gif_response.json"))
+# end
