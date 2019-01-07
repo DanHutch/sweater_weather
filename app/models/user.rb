@@ -1,11 +1,16 @@
 class User < ApplicationRecord
   require 'securerandom'
+  has_many :favorites
   has_secure_password
 
   before_create :create_api_key
 
-  validates_presence_of :email, :password
-  validates_uniqueness_of :email
+  validates :email, uniqueness: true, presence: true
+  validates_presence_of :password
+
+  def add_fav(data)
+    favorites.find_or_create_by(location: data[:location].downcase)
+  end
 
   private
 

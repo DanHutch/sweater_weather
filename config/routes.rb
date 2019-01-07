@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
       post "/sessions", to: "sessions#create"
 
+      post "/favorites", to: "favorites#create"
+
       get "/gifs", to: "gifs#index"
     end
   end
