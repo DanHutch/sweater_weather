@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
       post "/users", to: "users#create"
 
+      post "/sessions", to: "sessions#create"
+
       get "/gifs", to: "gifs#index"
     end
   end
