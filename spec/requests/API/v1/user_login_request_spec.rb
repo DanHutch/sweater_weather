@@ -31,7 +31,7 @@ RSpec.describe 'POST /api/v1/sessions' do
 
     post "/api/v1/sessions#{parameters}"
 
-    expect(response.status).to eq(400)
+    expect(response.status).to eq(401)
     expect(response.body).to eq("Invalid")
   end
 
