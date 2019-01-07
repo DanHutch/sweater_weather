@@ -29,7 +29,7 @@ class ForecastFacade
 
     def add_daily_forecasts(forecast)
       forecast.dailies.each do |daily|
-        forecast.daily_forecasts << Daily.with_gif(daily)
+        forecast.add_daily_forecast(Daily.with_gif(daily))
       end
     end
 
