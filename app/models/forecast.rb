@@ -19,8 +19,8 @@ class Forecast
               :daily_summary,
               :hourlies,
               :dailies,
-              :copyright
-  attr_accessor :daily_forecasts
+              :copyright,
+              :daily_forecasts
 
   def initialize(weather_data, location_data)
     @id = weather_data[:currently][:time]
@@ -45,6 +45,11 @@ class Forecast
     @dailies = weather_data[:daily][:data]
     @daily_forecasts = []
     @copyright = "2018"
-	end
+  end
+
+  def add_daily_forecast(daily_forecast)
+    @daily_forecasts << daily_forecast
+  end
+
 
 end
