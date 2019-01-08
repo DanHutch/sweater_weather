@@ -8,10 +8,17 @@ class ForecastFacade
     new(location).forecast
   end
 
-  def forecast
+  def self.weather(location)
+    new(location).weather
+  end
+
+  def weather
     place_data = coord_results
-    forecast = Forecast.new(weather_results(place_data[:coords]), place_data)
-    serialized = ForecastSerializer.new(forecast)
+    Forecast.new(weather_results(place_data[:coords]), place_data)
+  end
+
+  def forecast
+    ForecastSerializer.new(weather)
   end
 
   def self.dailies_with_gifs(location)
