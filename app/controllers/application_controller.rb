@@ -10,4 +10,10 @@ class ApplicationController < ActionController::API
     end
   end
 
+  def validate_password
+    unless params[:password] == params[:password_confirmation]
+      render json: "Something went wrong!", status: 422
+    end
+  end
+
 end
