@@ -16,10 +16,22 @@ class Api::V1::FavoritesController < ApplicationController
     end
   end
 
+  def destroy
+    if current_user
+      render json: FavSerializer.new(fav_destroy)
+    else
+      render json: "Unauthorized", status: 401
+    end
+  end
+
   private
 
   def new_fav
     current_user.add_fav(fav_params)
+  end
+
+  def fav_destroy
+    current_user.destroy_fav(fav_params)
   end
 
   def fav_locations

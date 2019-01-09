@@ -8,8 +8,13 @@ class User < ApplicationRecord
   validates :email, uniqueness: true, presence: true
   validates_presence_of :password
 
-  def add_fav(data)
-    favorites.find_or_create_by(location: data[:location].downcase)
+  def add_fav(data_in)
+    favorites.find_or_create_by(location: data_in[:location].downcase)
+  end
+
+  def destroy_fav(data_in)
+    entry = favorites.find_by(location: data_in[:location].downcase)
+    entry.delete
   end
 
   private

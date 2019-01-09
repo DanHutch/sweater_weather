@@ -12,6 +12,8 @@ RSpec.describe 'POST /api/v1/favorites' do
 
     parameters = "?location=#{location}&api_key=#{@user.api_key}"
 
+    expect(@user.favorites.count).to eq(0)
+
     post "/api/v1/favorites#{parameters}"
 
     expect(response).to be_successful
@@ -22,6 +24,9 @@ RSpec.describe 'POST /api/v1/favorites' do
     expect(results[:data]).to have_key(:attributes)
     expect(results[:data][:attributes]).to have_key(:location)
     expect(results[:data][:attributes][:location]).to be_a String
+    expect(results[:data][:attributes][:location]).to eq(location.downcase)
+
+    expect(@user.favorites.count).to eq(1)
 
   end
 
@@ -30,15 +35,22 @@ RSpec.describe 'POST /api/v1/favorites' do
 
     parameters = "?location=#{location}&api_key=invalidkey"
 
+    expect(@user.favorites.count).to eq(0)
+
     post "/api/v1/favorites#{parameters}"
 
     expect(response.status).to eq(401)
     expect(response.body).to eq("Unauthorized")
+
+    expect(@user.favorites.count).to eq(0)
+
   end
 
   it 'should not create a duplicate favorite entry if location is already favorited' do
     @user.favorites.create(location: "denver,co")
+
     expect(@user.favorites.count).to eq(1)
+
     location = "Denver,CO"
 
     parameters = "?location=#{location}&api_key=#{@user.api_key}"
@@ -49,6 +61,7 @@ RSpec.describe 'POST /api/v1/favorites' do
     expect(response.status).to eq(201)
 
     results = JSON.parse(response.body, symbolize_names: true)
+
     expect(results).to have_key(:data)
     expect(results[:data]).to have_key(:attributes)
     expect(results[:data][:attributes]).to have_key(:location)
