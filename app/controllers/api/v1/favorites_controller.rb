@@ -1,27 +1,16 @@
 class Api::V1::FavoritesController < ApplicationController
+  before_action :authenticate_user
 
   def index
-    if current_user
-      render json: FavsWithForecastsSerializer.new(fav_locations), status: 200
-    else
-      render json: "Unauthorized", status: 401
-    end
+    render json: FavsWithForecastsSerializer.new(fav_locations), status: 200
   end
 
   def create
-    if current_user
-      render json: FavSerializer.new(new_fav), status: 201
-    else
-      render json: "Unauthorized", status: 401
-    end
+    render json: FavSerializer.new(new_fav), status: 201
   end
 
   def destroy
-    if current_user
-      render json: FavSerializer.new(fav_destroy)
-    else
-      render json: "Unauthorized", status: 401
-    end
+    render json: FavSerializer.new(fav_destroy)
   end
 
   private
