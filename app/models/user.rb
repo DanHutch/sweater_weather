@@ -14,8 +14,8 @@ class User < ApplicationRecord
 
   private
 
-    def create_api_key
-      self.api_key = SecureRandom.uuid
-    end
+  def create_api_key
+    self.api_key = SecureRandom.uuid
+  end
 
 end
