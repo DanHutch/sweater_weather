@@ -1,5 +1,5 @@
 # README
-## Rales_Engine
+## Sweater Weather
 
 Sweater Weather is a Ruby on Rails API that provides Fast JsonAPI formatted endpoints for weather data, based on location. This app uses the Google geo-coding API to return geographical coordinates for a location, and the Dark Sky weather API to return weather data, based on coordinates. It was built by Dan Hutchinson (github: DanHutch) as a final solo project for Module 3 of the Back-End Engineering program at the Turing School.
 
