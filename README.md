@@ -60,6 +60,7 @@ Once API keys have been properly stored in the environment, you can delete the s
      Accept: application/json
      ```
    - Sample response body (abridged): `status: 200`
+
      ![sample weather response](./sample_weather_response.png)
 
 2. **Account Creation**
@@ -79,6 +80,7 @@ Once API keys have been properly stored in the environment, you can delete the s
      }
      ```
    - Sample response body: `status: 201`
+
      ![sample user create response](./sample_user_create_response.png)
 
 3. **Login**
@@ -97,6 +99,7 @@ Once API keys have been properly stored in the environment, you can delete the s
      }
      ```
    - Sample response body: `status: 200`
+
      ![sample user create response](./sample_user_create_response.png)
 
 4. **Favoriting Locations**
@@ -115,6 +118,7 @@ Once API keys have been properly stored in the environment, you can delete the s
      }
      ```
    - Sample response body: `status: 201`
+
      ![sample favorite create response](./sample_favorite_create_response.png)
 
 5. **Listing Favorite Locations**
@@ -132,6 +136,7 @@ Once API keys have been properly stored in the environment, you can delete the s
      }
      ```
    - Sample response body (abridged): `status: 200`
+
      ![sample favorites response](./sample_favorites_response.png)
 
 6. **Removing Favorite Locations**
