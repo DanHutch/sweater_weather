@@ -10,17 +10,13 @@ class Api::V1::FavoritesController < ApplicationController
   end
 
   def destroy
-    render json: FavSerializer.new(fav_destroy)
+    current_user.destroy_fav(fav_params)
   end
 
   private
 
   def new_fav
     current_user.add_fav(fav_params)
-  end
-
-  def fav_destroy
-    current_user.destroy_fav(fav_params)
   end
 
   def fav_locations
