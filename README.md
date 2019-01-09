@@ -49,7 +49,8 @@ Once API keys have been properly stored in the environment, you can delete the s
 
 ### API Endpoints:
 
-
+1. **Weather for a City**
+   -
 
 ### Contributing:
 
