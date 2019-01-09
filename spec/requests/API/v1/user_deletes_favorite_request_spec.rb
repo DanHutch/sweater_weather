@@ -19,17 +19,7 @@ RSpec.describe 'DELETE /api/v1/favorites' do
     delete "/api/v1/favorites#{parameters}"
 
     expect(response).to be_successful
-    expect(response.status).to eq(200)
-
-    results = JSON.parse(response.body, symbolize_names: true)
-
-    expect(results).to have_key(:data)
-    expect(results[:data]).to have_key(:attributes)
-    expect(results[:data][:attributes]).to have_key(:location)
-    expect(results[:data][:attributes][:location]).to be_a String
-    expect(results[:data][:attributes][:location]).to eq(location.downcase)
-
-    expect(@user.favorites.count).to eq(1)
+    expect(response.status).to eq(204)
   end
 
   it 'should not delete a favorite if API key is invalid' do
