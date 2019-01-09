@@ -27,9 +27,9 @@ class ForecastFacade
 
   def dailies_with_gifs
     place_data = coord_results
-    @forecast = Forecast.new(weather_results(place_data[:coords]), place_data)
-    add_daily_forecasts(@forecast)
-    serialized = DailySerializer.new(@forecast)
+    forecast = Forecast.new(weather_results(place_data[:coords]), place_data)
+    add_daily_forecasts(forecast)
+    DailySerializer.new(forecast)
   end
 
   private
