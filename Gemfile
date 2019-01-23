@@ -12,6 +12,7 @@ gem 'puma', '~> 3.11'
 gem 'fast_jsonapi'
 gem 'faraday'
 gem 'figaro'
+gem 'rack-cors', require: 'rack/cors'
 
 gem 'bootsnap', '>= 1.1.0', require: false
 
